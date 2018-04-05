@@ -1,0 +1,1 @@
+export const BINANCE_API_URL_BASE = 'http://localhost:2999'
