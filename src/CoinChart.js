@@ -9,24 +9,23 @@ export default class  extends Component {
         super(props)
     }
 
-    getCoinDetail = () => {
-        httpPOST(BASE + '/detail', JSON.stringify({"symbol": this.props.coin.symbol})).then(res => {
-            res = JSON.parse(JSON.parse(res).result)
-            console.log(res)
-            return res
-        }).catch(err => {
-            console.log(err)
-            return {}
-        })
+    componentWillReceiveProps(nextProps){
+        if(Object.keys(nextProps.coin).length != 0){
+            console.log(nextProps.coin.symbol)
+            //TODO: コインの詳細情報を取得する処理を入れる
+        }
     }
 
     render() {
-        const coin_detail = this.getCoinDetail()
         return (
             <div className="chart">
-                {   coin_detail &&
-                    Object.keys(coin_detail).map(key => (
-                        <div>{key} : {coin_detail[key]}</div>
+                {
+                    Object.keys(this.props.coin).length === 0 &&
+                    <div>コインを選択してください</div>
+                }
+                {
+                    Object.keys(this.props.coin).map(key => (
+                        <div>{key} : {this.props.coin[key]}</div>
                     ))
                 }
             </div>

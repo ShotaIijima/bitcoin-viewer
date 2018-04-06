@@ -11,28 +11,21 @@ export default class  extends Component {
         super(props)
         this.state = {
             coins: [],
-            selected_coin: '',
+            selected_coin: {},
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.getAllPrices()
     }
 
     getAllPrices = () => {
         httpGET(BASE + '/allPrices').then(res => {
-            res = JSON.parse(JSON.parse(res).result)
+            res = JSON.parse(res)
             this.setState({ coins: res })
-            this.setDefaultSymbol()
         }).catch(err => {
             console.log('getAllPrices fail with ' + err)
         })
-    }
-
-    setDefaultSymbol = () => {
-        if(this.state.coins.length > 0){
-            this.setState({ selected_coin: this.state.coins[0].symbol })
-        }
     }
 
     onCoinListSelect = (symbol) => {

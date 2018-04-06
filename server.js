@@ -22,9 +22,7 @@ app.get('/allPrices', (req,res) => {
         console.log('Error: ' + err.message);
         return
       }
-      res.json({
-        result: body
-      })
+      res.send(body)
    })
 })
 
@@ -35,9 +33,7 @@ app.post('/detail', (req,res) => {
         console.log('Error: ' + err.message);
         return
       }
-      res.json({
-        result: body
-      })
+      res.send(body)
    })
 })
 
